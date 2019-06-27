@@ -228,61 +228,6 @@ class JobPosting extends Page
     }
 
     /**
-     * @param null $member
-     * @return bool|int
-     */
-    public function canView($member = null)
-    {
-        return true;
-    }
-
-    /**
-     * @param null $member
-     * @return bool|int
-     */
-    public function canEdit($member = null)
-    {
-        return false;
-    }
-
-    /**
-     * @param null $member
-     * @return bool|int
-     */
-    public function canDelete($member = null)
-    {
-        return false;
-    }
-
-    /**
-     * @param null $member
-     * @param array $context
-     * @return bool|int
-     */
-    public function canCreate($member = null, $context = [])
-    {
-        return false;
-    }
-
-    /**
-     * @param null $member
-     * @return bool|int
-     */
-    public function canArchive($member = null)
-    {
-        return false;
-    }
-
-    /**
-     * @param null $member
-     * @return bool
-     */
-    public function canRestoreToDraft($member = null)
-    {
-        return false;
-    }
-
-    /**
      * @return void
      */
     public function onAfterDelete()
