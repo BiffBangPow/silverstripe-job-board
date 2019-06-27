@@ -93,7 +93,7 @@ class JobPosting extends Page
                     TextField::create('Salary', 'Salary'),
                     DateField::create('ClosingDate', 'Closing Date'),
                     TextareaField::create('Summary', 'Summary'),
-                    HTMLEditorField::create('JobDescription', 'Job Description')->addExtraClass('stacked'),
+                    HTMLEditorField::create('JobDescription', 'Job Description'),
                     CheckboxSetField::create(
                         'JobSectors',
                         'Sectors',
