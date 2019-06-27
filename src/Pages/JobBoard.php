@@ -21,8 +21,8 @@ class JobBoard extends Page
      * @var array
      */
     private static $has_many = [
-        'JobSectors'        => JobSector::class,
-        'JobLocations'        => JobLocation::class,
+        'JobSectors'   => JobSector::class,
+        'JobLocations' => JobLocation::class,
     ];
 
     /**
@@ -30,7 +30,7 @@ class JobBoard extends Page
      */
     private static $owns = [
         'JobSectors',
-        'JobLocations'
+        'JobLocations',
     ];
 
     private static $extensions = [

@@ -1,3 +1,6 @@
 ---
 Name: silverstripe-rejb
 ---
+SilverStripe\Security\Member:
+  extensions:
+    - BiffBangPow\SilverstripeJobBoard\Extensions\JobBoardMemberExtension

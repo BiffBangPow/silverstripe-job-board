@@ -21,8 +21,8 @@ class JobBoardController extends PageController
     ];
 
     private static $url_handlers = [
-        'create'             => 'createAction',
-        'archive'            => 'archiveAction',
+        'create'  => 'createAction',
+        'archive' => 'archiveAction',
     ];
 
     /**
@@ -33,8 +33,8 @@ class JobBoardController extends PageController
     {
         $dataList = JobPosting::get();
         $filters = [
-            'Parent.ID' => $this->data()->ID,
-            'ClosingDate:GreaterThanOrEqual' => date('Y-m-d')
+            'Parent.ID'                      => $this->data()->ID,
+            'ClosingDate:GreaterThanOrEqual' => date('Y-m-d'),
         ];
         $filterAny = [];
 
@@ -86,7 +86,7 @@ class JobBoardController extends PageController
      */
     public function IsNoLocationSelected()
     {
-       return ($this->getRequest()->getVar('l') === null || $this->getRequest()->getVar('l') === '');
+        return ($this->getRequest()->getVar('l') === null || $this->getRequest()->getVar('l') === '');
     }
 
     /**

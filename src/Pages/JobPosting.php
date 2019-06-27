@@ -42,11 +42,11 @@ class JobPosting extends Page
     private static $allowed_children = [];
 
     private static $db = [
-        'Summary'                => DBText::class,
-        'DisplayLocation'        => DBVarchar::class,
-        'JobDescription'         => DBHTMLText::class,
-        'Salary'                 => DBVarchar::class,
-        'ClosingDate'            => DBDate::class,
+        'Summary'         => DBText::class,
+        'DisplayLocation' => DBVarchar::class,
+        'JobDescription'  => DBHTMLText::class,
+        'Salary'          => DBVarchar::class,
+        'ClosingDate'     => DBDate::class,
     ];
 
     private static $many_many = [
@@ -80,7 +80,7 @@ class JobPosting extends Page
         $fields->addFieldsToTab('Root.Main',
             [
                 TextField::create('Title', 'Job Title'),
-                DropdownField::create('ParentID', 'Job Board', JobBoard::get()->map())
+                DropdownField::create('ParentID', 'Job Board', JobBoard::get()->map()),
             ],
             'Content'
         );
@@ -104,7 +104,7 @@ class JobPosting extends Page
                         'JobLocationID',
                         'Location',
                         $this->getParent()->JobLocations()->map('ID', 'Title')
-                    )->setEmptyString('Select a location')
+                    )->setEmptyString('Select a location'),
                 ]
             );
         }
@@ -192,7 +192,7 @@ class JobPosting extends Page
         } else {
             $excerpt = $this->JobDescription;
         }
-        $excerpt = html_entity_decode(strip_tags($excerpt),ENT_QUOTES);
+        $excerpt = html_entity_decode(strip_tags($excerpt), ENT_QUOTES);
         $excerpt = preg_replace("/\r|\n/", " ", $excerpt);
         $excerpt = preg_replace("/ +/", " ", $excerpt);
         // Minus 3 is to account for the ellipsis

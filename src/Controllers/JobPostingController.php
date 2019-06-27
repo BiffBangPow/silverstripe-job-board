@@ -30,7 +30,7 @@ class JobPostingController extends ContentController
      * @var array
      */
     private static $allowed_actions = [
-        'ApplyForm'
+        'ApplyForm',
     ];
 
     /**
@@ -63,7 +63,7 @@ class JobPostingController extends ContentController
                     'PhoneNumber',
                     'Email',
                     'CoverLetter',
-                    'ContactConsent'
+                    'ContactConsent',
                 ]
             ));
 
