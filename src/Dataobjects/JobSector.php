@@ -2,6 +2,7 @@
 
 namespace BiffBangPow\SilverstripeJobBoard\DataObjects;
 
+use BiffBangPow\SilverstripeJobBoard\Pages\JobBoard;
 use BiffBangPow\SilverstripeJobBoard\Pages\JobPosting;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataList;
@@ -23,6 +24,13 @@ class JobSector extends DataObject
     /**
      * @var array
      */
+    private static $has_one = [
+        'JobBoard' => JobBoard::class,
+    ];
+
+    /**
+     * @var array
+     */
     private static $belongs_many_many = [
         'JobPostings' => JobPosting::class,
     ];
@@ -30,16 +38,8 @@ class JobSector extends DataObject
     /**
      * @var array
      */
-    private static $has_one = [
-        'JobDivision' => JobDivision::class,
-    ];
-
-    /**
-     * @var array
-     */
     private static $summary_fields = [
         'Title'             => 'Title',
-        'JobDivision.Title' => 'Division',
         'JobPostings.Count' => 'Jobs',
     ];
 
@@ -65,7 +65,7 @@ class JobSector extends DataObject
      */
     public function getLink()
     {
-        return $this->JobDivision()->JobBoard()->Link() . '?s%5B%5D=' . $this->ID;
+        return $this->JobBoard()->Link() . '?s%5B%5D=' . $this->ID;
     }
 
     /**

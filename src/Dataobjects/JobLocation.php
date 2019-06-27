@@ -2,10 +2,10 @@
 
 namespace BiffBangPow\SilverstripeJobBoard\DataObjects;
 
+use BiffBangPow\SilverstripeJobBoard\Pages\JobBoard;
 use BiffBangPow\SilverstripeJobBoard\Pages\JobPosting;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataObject;
-use SilverStripe\ORM\FieldType\DBInt;
 use SilverStripe\ORM\FieldType\DBVarchar;
 
 class JobLocation extends DataObject
@@ -15,14 +15,6 @@ class JobLocation extends DataObject
      */
     private static $db = [
         'Title' => DBVarchar::class,
-        'LMReference' => DBInt::class
-    ];
-
-    /**
-     * @var array
-     */
-    private static $has_one = [
-        'JobCountry' => JobCountry::class,
     ];
 
     /**
@@ -35,9 +27,15 @@ class JobLocation extends DataObject
     /**
      * @var array
      */
+    private static $has_one = [
+        'JobBoard' => JobBoard::class,
+    ];
+
+    /**
+     * @var array
+     */
     private static $summary_fields = [
         'Title'             => 'Title',
-        'JobCountry.Title'  => 'Country',
         'JobPostings.Count' => 'Jobs',
     ];
 

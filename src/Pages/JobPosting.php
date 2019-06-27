@@ -3,7 +3,6 @@
 namespace BiffBangPow\SilverstripeJobBoard\Pages;
 
 use Page;
-use BiffBangPow\SilverstripeJobBoard\DataObjects\JobFunction;
 use BiffBangPow\SilverstripeJobBoard\DataObjects\JobLocation;
 use BiffBangPow\SilverstripeJobBoard\DataObjects\JobSector;
 use SilverStripe\Forms\CheckboxSetField;
@@ -14,10 +13,8 @@ use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataList;
-use SilverStripe\ORM\FieldType\DBBoolean;
 use SilverStripe\ORM\FieldType\DBDate;
 use SilverStripe\ORM\FieldType\DBHTMLText;
-use SilverStripe\ORM\FieldType\DBInt;
 use SilverStripe\ORM\FieldType\DBText;
 use SilverStripe\ORM\FieldType\DBVarchar;
 use SilverStripe\Security\Member;
@@ -41,13 +38,11 @@ class JobPosting extends Page
     private static $allowed_children = [];
 
     private static $db = [
-        'LMReference'            => DBInt::class,
         'Summary'                => DBText::class,
         'DisplayLocation'        => DBVarchar::class,
         'JobDescription'         => DBHTMLText::class,
         'Salary'                 => DBVarchar::class,
         'ClosingDate'            => DBDate::class,
-        'JobAlertsSent'          => DBBoolean::class
     ];
 
     private static $many_many = [
@@ -56,7 +51,6 @@ class JobPosting extends Page
 
     private static $has_one = [
         "JobLocation" => JobLocation::class,
-        "JobFunction" => JobFunction::class,
         "Owner"       => Member::class,
     ];
 
@@ -78,12 +72,6 @@ class JobPosting extends Page
         $fields = parent::getCMSFields();
 
         $fields->removeByName('Content');
-        $fields->removeByName('ElementalArea');
-        $fields->removeByName('MenuTitle');
-        $fields->removeByName('Metadata');
-        $fields->removeByName('Menus');
-        $fields->removeByName('Title');
-        $fields->removeByName('SEOTitle');
 
         $fields->addFieldsToTab('Root.Main',
             [
@@ -111,14 +99,7 @@ class JobPosting extends Page
                     DropdownField::create(
                         'JobLocationID',
                         'Location',
-                        $this->getParent()->JobLocations()
-                            ->map('ID', 'Title')
-                    )->setEmptyString('Select a location'),
-                    DropdownField::create(
-                        'JobFunctionID',
-                        'Function',
-                        $this->getParent()->JobFunctions()
-                            ->map('ID', 'Title')
+                        $this->getParent()->JobLocations()->map('ID', 'Title')
                     )->setEmptyString('Select a location')
                 ]
             );
