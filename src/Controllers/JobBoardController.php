@@ -50,11 +50,6 @@ class JobBoardController extends PageController
             $filters['JobSectors.ID'] = $sectorIDs;
         }
 
-        $functionIDs = $this->getRequest()->getVar('f');
-        if (!is_null($functionIDs)) {
-            $filters['JobFunction.ID'] = $functionIDs;
-        }
-
         $locationID = $this->getRequest()->getVar('l');
         if (!is_null($locationID) && $locationID !== '') {
             $filters['JobLocation.ID'] = $locationID;
@@ -136,15 +131,6 @@ class JobBoardController extends PageController
     }
 
     /**
-     * @return bool
-     */
-    public function IsSelectedFunctions()
-    {
-        $functionIDs = $this->getRequest()->getVar('f');
-        return (!is_null($functionIDs));
-    }
-
-    /**
      * @param int $sectorID
      * @return bool
      */
@@ -154,19 +140,6 @@ class JobBoardController extends PageController
         $sectorIDs = $this->getRequest()->getVar('s');
         if (!is_null($sectorIDs)) {
             return in_array($sectorID, $sectorIDs);
-        }
-        return false;
-    }
-
-    /**
-     * @return bool
-     */
-    public function IsSelectedFunction($functionID)
-    {
-        $functionID = (int)$functionID;
-        $functionIDs = $this->getRequest()->getVar('f');
-        if (!is_null($functionIDs)) {
-            return in_array($functionID, $functionIDs);
         }
         return false;
     }
