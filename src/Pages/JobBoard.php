@@ -1,5 +1,10 @@
 <?php
 
+namespace BiffBangPow\SilverstripeJobBoard\Pages;
+
+use BiffBangPow\SilverstripeJobBoard\DataObjects\JobCountry;
+use BiffBangPow\SilverstripeJobBoard\DataObjects\JobDivision;
+use BiffBangPow\SilverstripeJobBoard\DataObjects\JobFunction;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;

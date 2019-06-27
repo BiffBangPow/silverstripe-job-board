@@ -1,5 +1,8 @@
 <?php
 
+namespace BiffBangPow\SilverstripeJobBoard\DataObjects;
+
+use BiffBangPow\SilverstripeJobBoard\Pages\JobPosting;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\FieldType\DBInt;

@@ -1,5 +1,9 @@
 <?php
 
+namespace BiffBangPow\SilverstripeJobBoard\Controllers;
+
+use BiffBangPow\SilverstripeJobBoard\Pages\JobBoard;
+use BiffBangPow\SilverstripeJobBoard\Pages\JobPosting;
 use SilverStripe\ORM\PaginatedList;
 
 /**

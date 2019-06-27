@@ -1,5 +1,8 @@
 <?php
 
+namespace BiffBangPow\SilverstripeJobBoard\Controllers;
+
+use BiffBangPow\SilverstripeJobBoard\Pages\JobBoard;
 use SilverStripe\Assets\File;
 use SilverStripe\Control\Director;
 use SilverStripe\Control\Email\Email;

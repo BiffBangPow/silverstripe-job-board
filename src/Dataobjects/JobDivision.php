@@ -1,5 +1,8 @@
 <?php
 
+namespace BiffBangPow\SilverstripeJobBoard\DataObjects;
+
+use BiffBangPow\SilverstripeJobBoard\Pages\JobBoard;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\FieldType\DBVarchar;
 

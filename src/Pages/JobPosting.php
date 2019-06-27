@@ -1,5 +1,10 @@
 <?php
 
+namespace BiffBangPow\SilverstripeJobBoard\Pages;
+
+use BiffBangPow\SilverstripeJobBoard\DataObjects\JobFunction;
+use BiffBangPow\SilverstripeJobBoard\DataObjects\JobLocation;
+use BiffBangPow\SilverstripeJobBoard\DataObjects\JobSector;
 use SilverStripe\Forms\CheckboxSetField;
 use SilverStripe\Forms\DateField;
 use SilverStripe\Forms\DropdownField;

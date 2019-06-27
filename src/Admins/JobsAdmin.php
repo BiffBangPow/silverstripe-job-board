@@ -1,5 +1,11 @@
 <?php
 
+use BiffBangPow\SilverstripeJobBoard\DataObjects\JobCountry;
+use BiffBangPow\SilverstripeJobBoard\DataObjects\JobDivision;
+use BiffBangPow\SilverstripeJobBoard\DataObjects\JobFunction;
+use BiffBangPow\SilverstripeJobBoard\DataObjects\JobLocation;
+use BiffBangPow\SilverstripeJobBoard\DataObjects\JobSector;
+use BiffBangPow\SilverstripeJobBoard\Pages\JobPosting;
 use SilverStripe\Admin\ModelAdmin;
 
 class JobsAdmin extends ModelAdmin

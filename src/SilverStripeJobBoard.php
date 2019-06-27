@@ -1,6 +1,6 @@
 <?php
 
-namespace BiffBangPow\JobBoard;
+namespace BiffBangPow\SilverstripeJobBoard;
 
 use SilverStripe\Core\Config\Configurable;
 
