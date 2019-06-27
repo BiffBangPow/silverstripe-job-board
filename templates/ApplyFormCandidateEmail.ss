@@ -4,7 +4,6 @@
 
 <p>You have provided the following information:</p>
 
-<p><strong>Job Reference:</strong> $LMReference</p>
 <p><strong>Full name:</strong><br /> $FullName</p>
 <p><strong>Phone number:</strong><br /> $PhoneNumber</p>
 <p><strong>Email:</strong><br /> $Email</p>

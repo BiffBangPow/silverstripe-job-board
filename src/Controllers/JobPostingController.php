@@ -88,14 +88,13 @@ class JobPostingController extends ContentController
 
             $data['ConsultantName'] = $this->Owner()->FirstName . ' ' . $this->Owner()->Surname;
             $data['JobTitle'] = $this->Title;
-            $data['LMReference'] = $this->LMReference;
             $data['JobLink'] = Director::absoluteBaseURL() . $this->Link();
 
             $email = Email::create();
             $email->setHTMLTemplate('ApplyFormEmail');
             $email->setFrom($from);
             $email->setTo($recipient);
-            $email->setSubject('Application for ' . $this->LMReference . ' - ' . $this->Title);
+            $email->setSubject('Application for ' . $this->Title);
 
             if ($data['CV']['tmp_name'] !== '') {
                 $cv = new File();

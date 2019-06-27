@@ -41,7 +41,6 @@ class JobBoardController extends PageController
         $textSearch = $this->getRequest()->getVar('t');
         if (!is_null($textSearch)) {
             $filterAny['Title:PartialMatch'] = $textSearch;
-            $filterAny['LMReference:PartialMatch'] = $textSearch;
             $filterAny['Summary:PartialMatch'] = $textSearch;
             $filterAny['JobDescription:PartialMatch'] = $textSearch;
         }

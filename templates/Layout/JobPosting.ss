@@ -55,9 +55,6 @@
                     <div class="job-posting-panel mb-2">
                         <i class="fal mr-1 fa-fw fa-user text-primary"></i> $JobFunction.Title
                     </div>
-                    <div class="job-posting-panel mb-2">
-                        <i class="fal mr-1 fa-fw fa-hashtag text-primary"></i> $LMReference
-                    </div>
                     <div class="d-flex py-3">
                         <button
                             type="button"

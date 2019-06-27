@@ -1,8 +1,7 @@
 <p>To $ConsultantName,</p>
 
-<p>The following candidate has applied for the position of $JobTitle ($LMReference) - $JobLink</p>
+<p>The following candidate has applied for the position of $JobTitle - $JobLink</p>
 
-<p><strong>Job Reference:</strong>  $LMReference</p>
 <p><strong>Full name:</strong><br /> $FullName</p>
 <p><strong>Phone number:</strong><br /> $PhoneNumber</p>
 <p><strong>Email:</strong><br /> $Email</p>
