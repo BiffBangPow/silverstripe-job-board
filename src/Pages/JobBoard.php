@@ -46,52 +46,6 @@ class JobBoard extends Page
     ];
 
     /**
-     * @param null $member
-     * @return bool|int
-     */
-    function canView($member = null)
-    {
-        return true;
-    }
-
-    /**
-     * @param null $member
-     * @return bool|int
-     */
-    function canEdit($member = null)
-    {
-        return false;
-    }
-
-    /**
-     * @param null $member
-     * @return bool|int
-     */
-    function canDelete($member = null)
-    {
-        return false;
-    }
-
-    /**
-     * @param null $member
-     * @return bool|int
-     */
-    function canArchive($member = null)
-    {
-        return false;
-    }
-
-    /**
-     * @param null $member
-     * @param array $context
-     * @return bool|int
-     */
-    function canCreate($member = null, $context = [])
-    {
-        return false;
-    }
-
-    /**
      * @return FieldList
      */
     public function getCMSFields()
