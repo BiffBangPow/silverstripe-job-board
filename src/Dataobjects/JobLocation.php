@@ -11,6 +11,11 @@ use SilverStripe\ORM\FieldType\DBVarchar;
 class JobLocation extends DataObject
 {
     /**
+     * @var string
+     */
+    private static $table_name = 'JobLocation';
+
+    /**
      * @var array
      */
     private static $db = [

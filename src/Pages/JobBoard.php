@@ -16,6 +16,11 @@ use SilverStripe\Lumberjack\Model\Lumberjack;
 class JobBoard extends Page
 {
     /**
+     * @var string
+     */
+    private static $table_name = 'JobBoard';
+
+    /**
      * @var array
      */
     private static $has_many = [

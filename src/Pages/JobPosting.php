@@ -30,6 +30,10 @@ use SilverStripe\Security\Security;
  */
 class JobPosting extends Page
 {
+    /**
+     * @var string
+     */
+    private static $table_name = 'JobPosting';
 
     const EXCERPT_LENGTH = 280;
 
