@@ -2,6 +2,7 @@
 
 namespace BiffBangPow\SilverstripeJobBoard\Pages;
 
+use Page;
 use BiffBangPow\SilverstripeJobBoard\DataObjects\JobCountry;
 use BiffBangPow\SilverstripeJobBoard\DataObjects\JobDivision;
 use BiffBangPow\SilverstripeJobBoard\DataObjects\JobFunction;

@@ -2,8 +2,10 @@
 
 namespace BiffBangPow\SilverstripeJobBoard\Controllers;
 
+use PageController;
 use BiffBangPow\SilverstripeJobBoard\Pages\JobBoard;
 use SilverStripe\Assets\File;
+use SilverStripe\CMS\Controllers\ContentController;
 use SilverStripe\Control\Director;
 use SilverStripe\Control\Email\Email;
 use SilverStripe\Forms\CheckboxField;
@@ -22,7 +24,7 @@ use SilverStripe\Control\HTTPResponse;
 /**
  * @method JobBoard data
  */
-class JobPostingController extends PageController
+class JobPostingController extends ContentController
 {
     /**
      * @var array
