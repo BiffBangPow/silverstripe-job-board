@@ -77,6 +77,7 @@ class JobPosting extends Page
     {
         $fields = parent::getCMSFields();
 
+        $fields->removeByName('Content');
         $fields->removeByName('ElementalArea');
         $fields->removeByName('MenuTitle');
         $fields->removeByName('Metadata');
@@ -100,7 +101,7 @@ class JobPosting extends Page
                     TextField::create('Salary', 'Salary'),
                     DateField::create('ClosingDate', 'Closing Date'),
                     TextareaField::create('Summary', 'Summary'),
-                    HTMLEditorField::create('JobDescription', 'Job Description'),
+                    HTMLEditorField::create('JobDescription', 'Job Description')->addExtraClass('stacked'),
                     CheckboxSetField::create(
                         'JobSectors',
                         'Sectors',

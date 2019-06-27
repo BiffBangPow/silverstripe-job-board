@@ -58,6 +58,7 @@ class JobBoard extends Page
     {
         $fields = parent::getCMSFields();
 
+        $fields->removeByName('Content');
         $fields->removeByName('ElementalArea');
         $fields->removeByName('MenuTitle');
         $fields->removeByName('Metadata');
