@@ -1,9 +1,8 @@
 <?php
 
-namespace BiffBangPow\SilverstripeJobBoard\Controllers;
+namespace BiffBangPow\SilverstripeJobBoard\Pages;
 
 use PageController;
-use BiffBangPow\SilverstripeJobBoard\Pages\JobBoard;
 use SilverStripe\Assets\File;
 use SilverStripe\CMS\Controllers\ContentController;
 use SilverStripe\Control\Director;

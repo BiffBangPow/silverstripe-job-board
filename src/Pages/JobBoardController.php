@@ -1,11 +1,8 @@
 <?php
 
-namespace BiffBangPow\SilverstripeJobBoard\Controllers;
+namespace BiffBangPow\SilverstripeJobBoard\Pages;
 
 use PageController;
-use BiffBangPow\SilverstripeJobBoard\Pages\JobBoard;
-use BiffBangPow\SilverstripeJobBoard\Pages\JobPosting;
-use SilverStripe\Control\HTTPRequest;
 use SilverStripe\ORM\PaginatedList;
 
 /**
@@ -14,24 +11,7 @@ use SilverStripe\ORM\PaginatedList;
 class JobBoardController extends PageController
 {
 
-    const ITEMS_PER_PAGE = 10;
-
-    /**
-     * @return string
-     */
-    public function index(HTTPRequest $request)
-    {
-        var_dump($request);
-        die();
-        /**
-         * @var Blog $dataRecord
-         */
-        $dataRecord = $this->dataRecord;
-
-        $this->blogPosts = $dataRecord->getBlogPosts();
-
-        return $this->render();
-    }
+    const ITEMS_PER_PAGE = 4;
 
     /**
      * @return PaginatedList
@@ -40,34 +20,32 @@ class JobBoardController extends PageController
     public function getResults()
     {
         $dataList = JobPosting::get();
-        // $filters = [
-        //     'Parent.ID'                      => $this->data()->ID,
-        //     'ClosingDate:GreaterThanOrEqual' => date('Y-m-d'),
-        // ];
-        // $filterAny = [];
-        //
-        // $textSearch = $this->getRequest()->getVar('t');
-        // if (!is_null($textSearch)) {
-        //     $filterAny['Title:PartialMatch'] = $textSearch;
-        //     $filterAny['Summary:PartialMatch'] = $textSearch;
-        //     $filterAny['JobDescription:PartialMatch'] = $textSearch;
-        // }
-        //
-        // $sectorIDs = $this->getRequest()->getVar('s');
-        // if (!is_null($sectorIDs)) {
-        //     $filters['JobSectors.ID'] = $sectorIDs;
-        // }
-        //
-        // $locationID = $this->getRequest()->getVar('l');
-        // if (!is_null($locationID) && $locationID !== '') {
-        //     $filters['JobLocation.ID'] = $locationID;
-        // }
-        //
-        // $dataList = $dataList->filter($filters);
-        // $dataList = $dataList->filterAny($filterAny);
 
-        var_dump($dataList->map()->toArray());
-        die();
+        $filters = [
+            'Parent.ID'                      => $this->data()->ID,
+            'ClosingDate:GreaterThanOrEqual' => date('Y-m-d'),
+        ];
+        $filterAny = [];
+
+        $textSearch = $this->getRequest()->getVar('t');
+        if (!is_null($textSearch)) {
+            $filterAny['Title:PartialMatch'] = $textSearch;
+            $filterAny['Summary:PartialMatch'] = $textSearch;
+            $filterAny['JobDescription:PartialMatch'] = $textSearch;
+        }
+
+        $sectorIDs = $this->getRequest()->getVar('s');
+        if (!is_null($sectorIDs)) {
+            $filters['JobSectors.ID'] = $sectorIDs;
+        }
+
+        $locationID = $this->getRequest()->getVar('l');
+        if (!is_null($locationID) && $locationID !== '') {
+            $filters['JobLocation.ID'] = $locationID;
+        }
+
+        $dataList = $dataList->filter($filters);
+        $dataList = $dataList->filterAny($filterAny);
 
         $paginatedList = new PaginatedList($dataList, $this->getRequest());
         $paginatedList->setPageLength(self::ITEMS_PER_PAGE);

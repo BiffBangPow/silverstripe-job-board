@@ -16,19 +16,17 @@
 
                     <form name="job-search" method="get">
 
-                        <div class="job-board-filters__header">
-                            <a href="$Link" class="btn btn-outline-primary px-3 py-1 my-auto" id="job-search-reset">reset</a>
-                        </div>
-
-
                         <div class="job-board__job-search">
 
-                            <div>
-                                <input id="job-search-title" class="job-search-title my-2 my-xl-3" type="text" name="t" value="$CurrentTitleSearch" placeholder="search keywords" />
+                            <div class="form-group">
+                                <input type="text" class="form-control mb-2" id="job-search-title" name="t" value="$CurrentTitleSearch" placeholder="Search keywords" >
                             </div>
 
-                            <div>
-                                <h4>Sectors</h4>
+                            <button class="btn btn-primary btn-block mb-2" type="button" data-toggle="collapse" data-target="#sectorsCollapse" aria-expanded="false">
+                                Sectors <i class="fal fa-angle-down"></i>
+                            </button>
+
+                            <div class="collapse" id="sectorsCollapse">
                                 <% loop $JobSectors %>
                                     <div class="form-check">
                                         <input
@@ -44,30 +42,34 @@
                                 <% end_loop %>
                             </div>
 
-                            <div>
-                                <h4>Locations</h4>
+                            <button class="btn btn-primary btn-block mb-2" type="button" data-toggle="collapse" data-target="#locationsCollapse" aria-expanded="false">
+                                Locations <i class="fal fa-angle-down"></i>
+                            </button>
+
+                            <div class="collapse" id="locationsCollapse">
                                 <% loop $JobLocations %>
-                                <div class="form-check">
-                                    <input
-                                        class="form-check-input"
-                                        type="radio"
-                                        id="job-search-location"
-                                        name="l"
-                                        value="$ID"
-                                        <% if $Top.IsSelectedLocation($ID) %>checked<% end_if %>
-                                    />
-                                    <label class="form-check-label" for="location$ID">$Title</label><br />
-                                </div>
+                                    <div class="form-check">
+                                        <input
+                                            class="form-check-input"
+                                            type="radio"
+                                            id="job-search-location"
+                                            name="l"
+                                            value="$ID"
+                                            <% if $Top.IsSelectedLocation($ID) %>checked<% end_if %>
+                                        />
+                                        <label class="form-check-label" for="location$ID">$Title</label><br />
+                                    </div>
                                 <% end_loop %>
                             </div>
 
                         </div>
 
-                        <div>
-                            <button id="job-search-filter-btn" type="submit" class="job-search-filter-btn btn btn-primary py-2 px-4 mb-3">
-                                Filter
-                            </button>
-                        </div>
+                        <button id="job-search-filter-btn" type="submit" class="mb-2 btn-block job-search-filter-btn btn btn-primary">
+                            Filter
+                        </button>
+
+                        <a href="$Link" class="btn btn-outline-primary" id="job-search-reset">Reset</a>
+
                     </form>
 
                 </div>
@@ -77,21 +79,18 @@
             <div class="col-12 col-lg-9">
                 <% loop $Results %>
                     <div class="job-board__posting mb-3">
-                        <div class="row no-gutters">
-                            <div class="col-lg-7">
-                                <div class="job-board__posting-title d-flex px-4 px-lg-6 pt-4 pb-2 col-12">
-                                    <a href="$Link" class="text-dark"><div class="job-title-enhance" data-job-id="$ID">$Title</div></a>
-                                </div>
-                                <div class="job-summary px-4 px-lg-6 pt-2 pb-4">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="job-summary pb-4">
+                                    <h4><a href="$Link" class="text-dark"><div class="job-title-enhance" data-job-id="$ID">$Title</div></a></h4>
+                                    <% if $DisplayLocation %>
+                                        <p><i class="fa-fw fal fa-thumbtack"></i> $DisplayLocation</p>
+                                    <% end_if %>
+                                    <% if $Salary %>
+                                        <p><i class="fa-fw fal fa-money-bill"></i> $Salary</p>
+                                    <% end_if %>
                                     <p>$Excerpt</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 d-flex flex-column">
-                                <div class="details h-100 d-flex flex-column p-4">
-
-                                    <p class="mb-2 detail"><i class="text-primary fal mr-1 fa-fw fa-thumbtack"></i> $DisplayLocation</p>
-                                    <p class="mb-3 detail"><i class="text-primary fal mr-1 fa-fw fa-money-bill"></i> $Salary</p>
-                                    <a href="$Link" class="font-weight-bold text-primary view-job-link">VIEW JOB <i class="far fa-chevron-circle-right"></i></a>
+                                    <a href="$Link" class="btn btn-primary">View</a>
                                 </div>
                             </div>
                         </div>
