@@ -8,8 +8,14 @@
                         <% if $Owner.BlogProfileImage %>
                             <img class="owner-image mx-auto mb-4" src="$Owner.BlogProfileImage.FillMax(200, 200).Link" />
                         <% end_if %>
-                        <a href="$Owner.BlogProfileLink" target="_blank"><h5 class="text-primary">$Owner.FirstName $Owner.Surname</h5></a>
-                        <% if $Owner.Position %><h6>$Owner.Position</h6><% end_if %>
+                        <% if $Owner.BlogProfileLin %>
+                            <a href="$Owner.BlogProfileLink" target="_blank"><h5 class="text-primary">$Owner.FirstName $Owner.Surname</h5></a>
+                        <% else %>
+                            <h5 class="text-primary">$Owner.FirstName $Owner.Surname</h5>
+                        <% end_if %>
+                        <% if $Owner.Position %>
+                            <h6>$Owner.Position</h6>
+                        <% end_if %>
                         <% if $Owner.PhoneNumber %>
                             <a class="phone d-block py-2 font-weight-bold" href="tel:$Owner.PhoneNumber">
                                 <i class="pr-lg-3 pr-1 far fa-phone text-primary" aria-hidden="true"></i> $Owner.PhoneNumber
