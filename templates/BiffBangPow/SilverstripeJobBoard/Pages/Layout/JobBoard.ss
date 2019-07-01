@@ -1,13 +1,13 @@
-<div class="job-board">
+<div class="job-board py-4">
 
     <div class="container">
         <div class="row">
 
             <div class="col-12">
-                <h1 class="text-uppercase job-board__header-search pr-4">
+                <h1 class="text-uppercase job-board__header-search">
                     <span class="font-weight-bold">Search results</span> <% if $CurrentTitleSearch %>$CurrentTitleSearch<% else %>for all jobs<% end_if %>
                 </h1>
-                <p class="job-board__header-results"><strong>Jobs</strong> $Results.FirstItem - $Results.LastItem <strong>of</strong> $Results.TotalItems</p>
+                <p class="job-board__header-results text-right"><strong>Jobs</strong> $Results.FirstItem - $Results.LastItem <strong>of</strong> $Results.TotalItems</p>
             </div>
 
             <div class="col-12 col-lg-3">
@@ -23,7 +23,7 @@
                             </div>
 
                             <button class="btn btn-primary btn-block mb-2" type="button" data-toggle="collapse" data-target="#sectorsCollapse" aria-expanded="false">
-                                Sectors <i class="fal fa-angle-down"></i>
+                                Sectors <i class="fal fa-chevron-down pl-2"></i>
                             </button>
 
                             <div class="collapse" id="sectorsCollapse">
@@ -43,7 +43,7 @@
                             </div>
 
                             <button class="btn btn-primary btn-block mb-2" type="button" data-toggle="collapse" data-target="#locationsCollapse" aria-expanded="false">
-                                Locations <i class="fal fa-angle-down"></i>
+                                Locations <i class="fal fa-chevron-down pl-2"></i>
                             </button>
 
                             <div class="collapse" id="locationsCollapse">
@@ -65,7 +65,7 @@
                         </div>
 
                         <button id="job-search-filter-btn" type="submit" class="mb-2 btn-block job-search-filter-btn btn btn-primary">
-                            Filter
+                            Filter <i class="fal fa-chevron-right pl-2"></i>
                         </button>
 
                         <a href="$Link" class="btn btn-outline-primary" id="job-search-reset">Reset</a>
@@ -90,7 +90,7 @@
                                         <p><i class="fa-fw fal fa-money-bill"></i> $Salary</p>
                                     <% end_if %>
                                     <p>$Excerpt</p>
-                                    <a href="$Link" class="btn btn-primary">View</a>
+                                    <a href="$Link" class="btn btn-primary">View <i class="fal fa-chevron-right ml-2"></i></a>
                                 </div>
                             </div>
                         </div>
