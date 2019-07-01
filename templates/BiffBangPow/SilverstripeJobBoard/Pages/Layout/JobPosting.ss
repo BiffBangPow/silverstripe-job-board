@@ -37,23 +37,31 @@
                             </div>
                         </div>
                     </div>
-                    <div class="job-posting-panel mb-2">
-                        <i class="fal mr-1 fa-fw fa-thumbtack text-primary"></i> $DisplayLocation
-                    </div>
+                    <% if $DisplayLocation %>
+                        <div class="job-posting-panel mb-2">
+                            <i class="fal mr-1 fa-fw fa-thumbtack text-primary"></i> $DisplayLocation
+                        </div>
+                    <% end_if %>
                     <% if $Salary %>
                         <div class="job-posting-panel mb-2">
                             <i class="fal mr-1 fa-fw fa-money-bill text-primary"></i> $Salary
                         </div>
                     <% end_if %>
-                    <div class="job-posting-panel mb-2">
-                        <i class="fal mr-1 fa-fw fa-calendar text-primary"></i> $Posted
-                    </div>
-                    <div class="job-posting-panel mb-2">
-                        <i class="fal mr-1 fa-fw fa-alarm-clock text-primary"></i> $Closes
-                    </div>
-                    <div class="job-posting-panel mb-2">
-                        <i class="fal mr-1 fa-fw fa-tags text-primary"></i> $ReadableSectors
-                    </div>
+                    <% if $Posted %>
+                        <div class="job-posting-panel mb-2">
+                            <i class="fal mr-1 fa-fw fa-calendar text-primary"></i> $Posted
+                        </div>
+                    <% end_if %>
+                    <% if $Closes %>
+                        <div class="job-posting-panel mb-2">
+                            <i class="fal mr-1 fa-fw fa-alarm-clock text-primary"></i> $Closes
+                        </div>
+                    <% end_if %>
+                    <% if $ReadableSectors %>
+                        <div class="job-posting-panel mb-2">
+                            <i class="fal mr-1 fa-fw fa-tags text-primary"></i> $ReadableSectors
+                        </div>
+                    <% end_if %>
                     <div class="d-flex py-3">
                         <button
                             type="button"
