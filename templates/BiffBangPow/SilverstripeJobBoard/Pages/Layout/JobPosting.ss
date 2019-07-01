@@ -162,11 +162,3 @@
         }
     </script>
 </div>
-<% if $Content %>
-    <div class="container">
-        $Content
-    </div>
-<% end_if %>
-$ElementalArea
-$Form
-$CommentsForm

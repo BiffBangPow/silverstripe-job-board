@@ -23,7 +23,7 @@ use SilverStripe\Control\HTTPResponse;
 /**
  * @method JobBoard data
  */
-class JobPostingController extends ContentController
+class JobPostingController extends PageController
 {
     /**
      * @var array
@@ -37,7 +37,8 @@ class JobPostingController extends ContentController
      */
     public function ApplyForm()
     {
-        $linkHTML = 'By ticking this box you consent to Recruiter Republic contacting you with regards to your enquiry, and are agreeing to the <a href="/privacy-notice" target="_blank">privacy notice</a>';
+        $siteTitle = SiteConfig::current_site_config()->Title;
+        $linkHTML = 'By ticking this box you consent to ' . $siteTitle . ' contacting you with regards to your enquiry, and are agreeing to the <a href="/privacy-notice" target="_blank">privacy notice</a>';
 
         $fields = FieldList::create([
             TextField::create('FullName')->addExtraClass('col-12'),
