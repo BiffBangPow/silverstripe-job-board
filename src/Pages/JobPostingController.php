@@ -38,7 +38,7 @@ class JobPostingController extends PageController
     public function ApplyForm()
     {
         $siteTitle = SiteConfig::current_site_config()->Title;
-        $linkHTML = 'By ticking this box you consent to ' . $siteTitle . ' contacting you with regards to your enquiry, and are agreeing to the <a href="/privacy-notice" target="_blank">privacy notice</a>';
+        $linkHTML = 'By ticking this box you consent to ' . $siteTitle . ' contacting you with regards to your enquiry, and are agreeing to the privacy notice';
 
         $fields = FieldList::create([
             TextField::create('FullName')->addExtraClass('col-12'),
