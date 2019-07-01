@@ -11,7 +11,7 @@ use SilverStripe\ORM\PaginatedList;
 class JobBoardController extends PageController
 {
 
-    const ITEMS_PER_PAGE = 4;
+    const ITEMS_PER_PAGE = 10;
 
     /**
      * @return PaginatedList
