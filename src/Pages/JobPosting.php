@@ -399,9 +399,9 @@ class JobPosting extends Page
     {
         parent::onBeforeWrite();
 
-        if ($this->OwnerID == 0) {
-            $this->OwnerID = Security::getCurrentUser()->ID;
-        }
+        // if ($this->OwnerID == 0) {
+        //     $this->OwnerID = Security::getCurrentUser()->ID;
+        // }
     }
 
     /**
