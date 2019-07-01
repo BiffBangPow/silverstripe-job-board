@@ -5,6 +5,7 @@ namespace BiffBangPow\SilverstripeJobBoard\Pages;
 use Page;
 use BiffBangPow\SilverstripeJobBoard\DataObjects\JobLocation;
 use BiffBangPow\SilverstripeJobBoard\DataObjects\JobSector;
+use BiffBangPow\SilverstripeJobBoard\DataObjects\JobType;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
@@ -23,6 +24,7 @@ class JobBoard extends Page
     private static $has_many = [
         'JobSectors'   => JobSector::class,
         'JobLocations' => JobLocation::class,
+        'JobTypes'     => JobType::class,
     ];
 
     /**
@@ -31,6 +33,7 @@ class JobBoard extends Page
     private static $owns = [
         'JobSectors',
         'JobLocations',
+        'JobTypes',
     ];
 
     private static $extensions = [
@@ -62,6 +65,13 @@ class JobBoard extends Page
             'JobLocations',
             'Locations',
             $this->JobLocations(),
+            GridFieldConfig_RecordEditor::create()
+        ));
+
+        $fields->addFieldToTab('Root.Types', GridField::create(
+            'JobTypes',
+            'Types',
+            $this->JobTypes(),
             GridFieldConfig_RecordEditor::create()
         ));
 

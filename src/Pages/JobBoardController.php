@@ -39,9 +39,14 @@ class JobBoardController extends PageController
             $filters['JobSectors.ID'] = $sectorIDs;
         }
 
-        $locationID = $this->getRequest()->getVar('l');
-        if (!is_null($locationID) && $locationID !== '') {
-            $filters['JobLocation.ID'] = $locationID;
+        $locationIDs = $this->getRequest()->getVar('l');
+        if (!is_null($locationIDs)) {
+            $filters['JobLocations.ID'] = $locationIDs;
+        }
+
+        $typeIDs = $this->getRequest()->getVar('ty');
+        if (!is_null($typeIDs)) {
+            $filters['JobTypes.ID'] = $typeIDs;
         }
 
         $dataList = $dataList->filter($filters);
@@ -51,36 +56,6 @@ class JobBoardController extends PageController
         $paginatedList->setPageLength(self::ITEMS_PER_PAGE);
 
         return $paginatedList;
-    }
-
-    /**
-     * @param int $locationID
-     * @return bool
-     */
-    public function IsSelectedLocation(int $locationID)
-    {
-        $locationID = (int)$locationID;
-        $actualLocationID = (int)$this->getRequest()->getVar('l');
-        return ($actualLocationID === $locationID);
-    }
-
-    /**
-     * @return bool
-     */
-    public function IsNoLocationSelected()
-    {
-        return ($this->getRequest()->getVar('l') === null || $this->getRequest()->getVar('l') === '');
-    }
-
-    /**
-     * @param int $typeID
-     * @return bool
-     */
-    public function IsSelectedType($typeID)
-    {
-        $typeID = (int)$typeID;
-        $actualTypeID = (int)$this->getRequest()->getVar('ty');
-        return ($actualTypeID === $typeID);
     }
 
     /**
@@ -129,6 +104,52 @@ class JobBoardController extends PageController
         $sectorIDs = $this->getRequest()->getVar('s');
         if (!is_null($sectorIDs)) {
             return in_array($sectorID, $sectorIDs);
+        }
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function IsSelectedLocations()
+    {
+        $locationIDs = $this->getRequest()->getVar('l');
+        return (!is_null($locationIDs));
+    }
+
+    /**
+     * @param int $sectorID
+     * @return bool
+     */
+    public function IsSelectedLocation($locationID)
+    {
+        $locationID = (int)$locationID;
+        $locationIDs = $this->getRequest()->getVar('l');
+        if (!is_null($locationIDs)) {
+            return in_array($locationID, $locationIDs);
+        }
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function IsSelectedTypes()
+    {
+        $typeIDs = $this->getRequest()->getVar('ty');
+        return (!is_null($typeIDs));
+    }
+
+    /**
+     * @param int $sectorID
+     * @return bool
+     */
+    public function IsSelectedType($typeID)
+    {
+        $typeID = (int)$typeID;
+        $typeIDs = $this->getRequest()->getVar('ty');
+        if (!is_null($typeIDs)) {
+            return in_array($typeID, $typeIDs);
         }
         return false;
     }

@@ -8,12 +8,12 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\FieldType\DBVarchar;
 
-class JobLocation extends DataObject
+class JobType extends DataObject
 {
     /**
      * @var string
      */
-    private static $table_name = 'JobLocation';
+    private static $table_name = 'JobType';
 
     /**
      * @var array

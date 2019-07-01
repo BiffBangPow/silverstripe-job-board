@@ -22,11 +22,11 @@
                                 <input type="text" class="form-control mb-2" id="job-search-title" name="t" value="$CurrentTitleSearch" placeholder="Search keywords" >
                             </div>
 
-                            <button class="btn btn-primary btn-block mb-2" type="button" data-toggle="collapse" data-target="#sectorsCollapse" aria-expanded="false">
+                            <button class="btn btn-primary btn-block mb-2" type="button" data-toggle="collapse" data-target="#sectorsCollapse" <% if $IsSelectedSectors %>aria-expanded="true"<% else %>aria-expanded="false"<% end_if %>>
                                 Sectors <i class="fal fa-chevron-down pl-2"></i>
                             </button>
 
-                            <div class="collapse" id="sectorsCollapse">
+                            <div class="collapse <% if $IsSelectedSectors %>show<% end_if %>" id="sectorsCollapse">
                                 <% loop $JobSectors %>
                                     <div class="form-check">
                                         <input
@@ -42,22 +42,42 @@
                                 <% end_loop %>
                             </div>
 
-                            <button class="btn btn-primary btn-block mb-2" type="button" data-toggle="collapse" data-target="#locationsCollapse" aria-expanded="false">
+                            <button class="btn btn-primary btn-block mb-2" type="button" data-toggle="collapse" data-target="#locationsCollapse" <% if $IsSelectedLocations %>aria-expanded="true"<% else %>aria-expanded="false"<% end_if %>>
                                 Locations <i class="fal fa-chevron-down pl-2"></i>
                             </button>
 
-                            <div class="collapse" id="locationsCollapse">
+                            <div class="collapse <% if $IsSelectedLocations %>show<% end_if %>" id="locationsCollapse">
                                 <% loop $JobLocations %>
                                     <div class="form-check">
                                         <input
-                                            class="form-check-input"
-                                            type="radio"
-                                            id="job-search-location"
-                                            name="l"
+                                            type="checkbox"
+                                            id="location$ID"
+                                            name="l[]"
                                             value="$ID"
+                                            class="form-check-input"
                                             <% if $Top.IsSelectedLocation($ID) %>checked<% end_if %>
                                         />
-                                        <label class="form-check-label" for="location$ID">$Title</label><br />
+                                        <label class="form-check-label" for="location$ID">$Title</label>
+                                    </div>
+                                <% end_loop %>
+                            </div>
+
+                            <button class="btn btn-primary btn-block mb-2" type="button" data-toggle="collapse" data-target="#typesCollapse" <% if $IsSelectedTypes %>aria-expanded="true"<% else %>aria-expanded="false"<% end_if %>>
+                                Types <i class="fal fa-chevron-down pl-2"></i>
+                            </button>
+
+                            <div class="collapse <% if $IsSelectedTypes %>show<% end_if %>" id="typesCollapse">
+                                <% loop $JobTypes %>
+                                    <div class="form-check">
+                                        <input
+                                            type="checkbox"
+                                            id="type$ID"
+                                            name="ty[]"
+                                            value="$ID"
+                                            class="form-check-input"
+                                            <% if $Top.IsSelectedType($ID) %>checked<% end_if %>
+                                        />
+                                        <label class="form-check-label" for="type$ID">$Title</label>
                                     </div>
                                 <% end_loop %>
                             </div>

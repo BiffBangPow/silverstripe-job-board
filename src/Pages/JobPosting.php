@@ -5,6 +5,7 @@ namespace BiffBangPow\SilverstripeJobBoard\Pages;
 use Page;
 use BiffBangPow\SilverstripeJobBoard\DataObjects\JobLocation;
 use BiffBangPow\SilverstripeJobBoard\DataObjects\JobSector;
+use BiffBangPow\SilverstripeJobBoard\DataObjects\JobType;
 use SilverStripe\Forms\CheckboxSetField;
 use SilverStripe\Forms\DateField;
 use SilverStripe\Forms\DropdownField;
@@ -22,7 +23,8 @@ use SilverStripe\Security\Security;
 
 /**
  * @method JobSector[]|DataList JobSectors
- * @method JobLocation JobLocation
+ * @method JobLocation[]|DataList JobLocations
+ * @method JobType[]|DataList JobTypes
  * @method Member Owner
  * @method JobBoard getParent
  * @property int OwnerID
@@ -42,20 +44,25 @@ class JobPosting extends Page
     private static $allowed_children = [];
 
     private static $db = [
+        'Reference'       => DBVarchar::class,
         'Summary'         => DBText::class,
         'DisplayLocation' => DBVarchar::class,
         'JobDescription'  => DBHTMLText::class,
         'Salary'          => DBVarchar::class,
         'ClosingDate'     => DBDate::class,
+        'JobDuration'     => DBVarchar::class,
+        'JobStartDate'    => DBVarchar::class,
+        'JobSkills'       => DBVarchar::class,
     ];
 
     private static $many_many = [
-        "JobSectors" => JobSector::class,
+        "JobSectors"   => JobSector::class,
+        "JobLocations" => JobLocation::class,
+        "JobTypes"     => JobType::class,
     ];
 
     private static $has_one = [
-        "JobLocation" => JobLocation::class,
-        "Owner"       => Member::class,
+        "Owner" => Member::class,
     ];
 
     private static $summary_fields = [
@@ -90,6 +97,10 @@ class JobPosting extends Page
         if ($hasParent) {
             $fields->addFieldsToTab('Root.Main',
                 [
+                    TextField::create('Reference', 'Reference'),
+                    TextField::create('JobDuration', 'Job Duration'),
+                    TextField::create('JobStartDate', 'Job Start Date'),
+                    TextField::create('JobSkills', 'Job Skills'),
                     TextField::create('Salary', 'Salary'),
                     DateField::create('ClosingDate', 'Closing Date'),
                     TextareaField::create('Summary', 'Summary'),
@@ -100,11 +111,18 @@ class JobPosting extends Page
                         $this->getParent()->JobSectors()->map('ID', 'Title')->toArray(),
                         $this->JobSectors()
                     ),
-                    DropdownField::create(
-                        'JobLocationID',
+                    CheckboxSetField::create(
+                        'JobLocations',
                         'Location',
-                        $this->getParent()->JobLocations()->map('ID', 'Title')
-                    )->setEmptyString('Select a location'),
+                        $this->getParent()->JobLocations()->map('ID', 'Title')->toArray(),
+                        $this->JobLocations()
+                    ),
+                    CheckboxSetField::create(
+                        'JobTypes',
+                        'Types',
+                        $this->getParent()->JobTypes()->map('ID', 'Title')->toArray(),
+                        $this->JobTypes()
+                    ),
                 ]
             );
         }
@@ -143,13 +161,13 @@ class JobPosting extends Page
         $days = $seconds / 60 / 60 / 24;
         $days += 1;
         if ($days < 0) {
-            return "closed";
+            return "Closed";
         }
         if ($days < 1) {
-            return "today";
+            return "Today";
         }
         if ($days < 2) {
-            return "tomorrow";
+            return "Tomorrow";
         }
         return floor($days) . " days";
     }
@@ -164,13 +182,13 @@ class JobPosting extends Page
         $days = $seconds / 60 / 60 / 24;
         $days += 1;
         if ($days < 0) {
-            return "now";
+            return "Now";
         }
         if ($days < 1) {
-            return "today";
+            return "Today";
         }
         if ($days < 2) {
-            return "yesterday";
+            return "Yesterday";
         }
         return floor($days) . " days ago";
     }
@@ -183,6 +201,26 @@ class JobPosting extends Page
         /** @var DataList $sectors */
         $sectors = $this->JobSectors();
         return implode(', ', $sectors->map()->toArray());
+    }
+
+    /**
+     * @return string
+     */
+    public function getReadableLocations()
+    {
+        /** @var DataList $locations */
+        $locations = $this->JobLocations();
+        return implode(', ', $locations->map()->toArray());
+    }
+
+    /**
+     * @return string
+     */
+    public function getReadableTypes()
+    {
+        /** @var DataList $jobTypes */
+        $jobTypes = $this->JobTypes();
+        return implode(', ', $jobTypes->map()->toArray());
     }
 
     public function getExcerpt(): string

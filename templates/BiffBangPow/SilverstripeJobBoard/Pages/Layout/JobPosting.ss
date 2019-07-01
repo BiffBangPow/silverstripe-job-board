@@ -4,70 +4,122 @@
         <div class="row">
             <div class="col-12 col-lg-4 order-2 order-lg-1">
                 <div class="panel job-posting__facts">
-                    <div class="mb-2 d-flex row no-gutters job-posting__owner flex-column pb-3">
-                        <% if $Owner.BlogProfileImage %>
-                            <img class="owner-image mx-auto mb-4" src="$Owner.BlogProfileImage.FillMax(200, 200).Link" />
-                        <% end_if %>
-                        <% if $Owner.BlogProfileLin %>
-                            <a href="$Owner.BlogProfileLink" target="_blank"><h5 class="text-primary">$Owner.FirstName $Owner.Surname</h5></a>
-                        <% else %>
-                            <h5 class="text-primary">$Owner.FirstName $Owner.Surname</h5>
-                        <% end_if %>
-                        <% if $Owner.Position %>
-                            <h6>$Owner.Position</h6>
-                        <% end_if %>
-                        <% if $Owner.PhoneNumber %>
-                            <a class="phone d-block py-2 font-weight-bold" href="tel:$Owner.PhoneNumber">
-                                <i class="pr-lg-3 pr-1 far fa-phone text-primary" aria-hidden="true"></i> $Owner.PhoneNumber
-                            </a>
-                        <% end_if %>
-                        <% if $Owner.Email %>
-                            <a class="email d-block py-2 font-weight-bold" href="mailto:$Owner.Email">
-                                <i class="pr-lg-3 pr-1 far fa-paper-plane text-primary" aria-hidden="true"></i> $Owner.Email
-                            </a>
-                        <% end_if %>
 
-                        <div class="modal fade text-left" id="apply-modal" tabindex="-1" role="dialog">
-                            <div class="modal-dialog modal-lg modal-dialog-centered text-dark" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Apply for $Title</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        $ApplyForm
-                                    </div>
+                    <div class="modal fade text-left" id="apply-modal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-lg modal-dialog-centered text-dark" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Apply for $Title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    $ApplyForm
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <% if $DisplayLocation %>
-                        <div class="job-posting-panel mb-2">
-                            <i class="fal mr-1 fa-fw fa-thumbtack text-primary"></i> $DisplayLocation
+
+                    <div class="card mb-4">
+                        <% if $Owner.BlogProfileImage %>
+                            <img class="card-img-top" src="$Owner.BlogProfileImage.FillMax(600, 600).Link" alt="Consultant image">
+                        <% end_if %>
+                        <div class="card-body">
+                            <h5 class="card-title">$Owner.FirstName $Owner.Surname</h5>
+                            <% if $Owner.Position %>
+                                <p class="card-text mb-0">$Owner.Position</p>
+                            <% end_if %>
+                            <% if $Owner.PhoneNumber %>
+                                <p class="card-text mb-0">$Owner.PhoneNumber</p>
+                            <% end_if %>
+                            <% if $Owner.Email %>
+                                <p class="card-text mb-0">$Owner.Email</p>
+                            <% end_if %>
                         </div>
-                    <% end_if %>
-                    <% if $Salary %>
-                        <div class="job-posting-panel mb-2">
-                            <i class="fal mr-1 fa-fw fa-money-bill text-primary"></i> $Salary
-                        </div>
-                    <% end_if %>
-                    <% if $Posted %>
-                        <div class="job-posting-panel mb-2">
-                            <i class="fal mr-1 fa-fw fa-calendar text-primary"></i> $Posted
-                        </div>
-                    <% end_if %>
-                    <% if $Closes %>
-                        <div class="job-posting-panel mb-2">
-                            <i class="fal mr-1 fa-fw fa-alarm-clock text-primary"></i> $Closes
-                        </div>
-                    <% end_if %>
-                    <% if $ReadableSectors %>
-                        <div class="job-posting-panel mb-2">
-                            <i class="fal mr-1 fa-fw fa-tags text-primary"></i> $ReadableSectors
-                        </div>
-                    <% end_if %>
+                    </div>
+
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="row" colspan="2">Job details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if $Title %>
+                                <tr>
+                                    <th scope="row">Title</th>
+                                    <td>$Title</td>
+                                </tr>
+                            <% end_if %>
+                            <% if $Reference %>
+                                <tr>
+                                    <th scope="row">Reference</th>
+                                    <td>$Reference</td>
+                                </tr>
+                            <% end_if %>
+                            <% if $DisplayLocation %>
+                                <tr>
+                                    <th scope="row">Location</th>
+                                    <td>$DisplayLocation</td>
+                                </tr>
+                            <% else_if $ReadableLocations %>
+                                <tr>
+                                    <th scope="row">Location</th>
+                                    <td>$ReadableLocations</td>
+                                </tr>
+                            <% end_if %>
+                            <% if $ReadableSectors %>
+                                <tr>
+                                    <th scope="row">Sector</th>
+                                    <td>$ReadableSectors</td>
+                                </tr>
+                            <% end_if %>
+                            <% if $ReadableTypes %>
+                                <tr>
+                                    <th scope="row">Type</th>
+                                    <td>$ReadableTypes</td>
+                                </tr>
+                            <% end_if %>
+                            <% if $Salary %>
+                                <tr>
+                                    <th scope="row">Salary</th>
+                                    <td>$Salary</td>
+                                </tr>
+                            <% end_if %>
+                            <% if $JobSkills %>
+                                <tr>
+                                    <th scope="row">Skills</th>
+                                    <td>$JobSkills</td>
+                                </tr>
+                            <% end_if %>
+                            <% if $JobStartDate %>
+                                <tr>
+                                    <th scope="row">Start Date</th>
+                                    <td>$JobStartDate</td>
+                                </tr>
+                            <% end_if %>
+                            <% if $JobDuration %>
+                                <tr>
+                                    <th scope="row">Duration</th>
+                                    <td>$JobDuration</td>
+                                </tr>
+                            <% end_if %>
+                            <% if $Posted %>
+                                <tr>
+                                    <th scope="row">Posted</th>
+                                    <td>$Posted</td>
+                                </tr>
+                            <% end_if %>
+                            <% if $Closes %>
+                                <tr>
+                                    <th scope="row">Closes</th>
+                                    <td>$Closes</td>
+                                </tr>
+                            <% end_if %>
+                        </tbody>
+                    </table>
+
                     <div class="d-flex py-3">
                         <button
                             type="button"
