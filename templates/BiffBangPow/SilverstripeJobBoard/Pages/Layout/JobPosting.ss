@@ -22,19 +22,16 @@
                     </div>
 
                     <div class="card mb-4">
-                        <% if $Owner.BlogProfileImage %>
-                            <img class="card-img-top" src="$Owner.BlogProfileImage.FillMax(600, 600).Link" alt="Consultant image">
-                        <% end_if %>
                         <div class="card-body">
-                            <h5 class="card-title">$Owner.FirstName $Owner.Surname</h5>
-                            <% if $Owner.Position %>
-                                <p class="card-text mb-0">$Owner.Position</p>
+                            <h5 class="card-title">$DisplayContactName</h5>
+                            <% if $DisplayPosition %>
+                                <p class="card-text mb-0">$DisplayPosition</p>
                             <% end_if %>
-                            <% if $Owner.PhoneNumber %>
-                                <p class="card-text mb-0">$Owner.PhoneNumber</p>
+                            <% if $DisplayContactTelephone %>
+                                <p class="card-text mb-0">$DisplayContactTelephone</p>
                             <% end_if %>
-                            <% if $Owner.Email %>
-                                <p class="card-text mb-0">$Owner.Email</p>
+                            <% if $DisplayContactEmail %>
+                                <p class="card-text mb-0">$DisplayContactEmail</p>
                             <% end_if %>
                         </div>
                     </div>
@@ -182,13 +179,13 @@
         {
             "@context": "http://schema.org",
             "@type": "JobPosting",
-            "jobBenefits": "",
+            "jobBenefits": "$SalaryBenefits",
             "datePosted": "$Created",
             "description": "$JobDescription",
             "disambiguatingDescription": "$Summary",
             "image": "$SiteConfig.HeaderLogo.AbsoluteLink",
             "educationRequirements": "",
-            "employmentType": "Permanent",
+            "employmentType": [<% loop $JobTypes %>"$GoogleJobsValue"<% if not $Last %>, <% end_if %><% end_loop %>],
             "hiringOrganization" : {
                 "@type" : "Organization",
                 "name" : "$SiteConfig.Title",
@@ -196,9 +193,11 @@
                 "logo" : "$SiteConfig.HeaderLogo.AbsoluteLink",
                 "url": "$AbsoluteLink"
             },
-            "experienceRequirements": "",
-            "incentiveCompensation": "",
-            "occupationalCategory": "$Function.Title",
+            "identifier": {
+                "@type": "PropertyValue",
+                "name": "$SiteConfig.Title",
+                "value": "$Reference"
+            },
             "jobLocation": {
                 "@type": "Place",
                 "address": {
@@ -211,21 +210,18 @@
             },
             "baseSalary": {
                 "@type": "MonetaryAmount",
-                "currency": "USD",
+                "currency": "$SalaryCurrency",
                 "value": {
                     "@type": "QuantitativeValue",
-                    "minValue": "0",
-                    "maxValue": "0",
-                    "value": "0",
-                    "unitText": "YEAR"
+                    "minValue": "$SalaryFrom",
+                    "maxValue": "$SalaryTo",
+                    "unitText": "$SalaryPer"
                 }
             },
-            "salaryCurrency": "GBP",
-            "skills": "",
-            "specialCommitments": "",
+            "salaryCurrency": "$SalaryCurrency",
+            "skills": "$JobSkills",
             "title": "$Title",
-            "validThrough": "$ClosingDate",
-            "workHours": ""
+            "validThrough": "$ClosingDate"
         }
     </script>
 </div>

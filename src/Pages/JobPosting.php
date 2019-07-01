@@ -6,6 +6,7 @@ use Page;
 use BiffBangPow\SilverstripeJobBoard\DataObjects\JobLocation;
 use BiffBangPow\SilverstripeJobBoard\DataObjects\JobSector;
 use BiffBangPow\SilverstripeJobBoard\DataObjects\JobType;
+use SilverStripe\Control\Director;
 use SilverStripe\Forms\CheckboxSetField;
 use SilverStripe\Forms\DateField;
 use SilverStripe\Forms\DropdownField;
@@ -46,6 +47,10 @@ use SilverStripe\Security\Security;
  * @property string JobDuration
  * @property string JobStartDate
  * @property string JobSkills
+ * @property string ContactName
+ * @property string ContactEmail
+ * @property string ContactTelephone
+ * @property string ContactURL
  */
 class JobPosting extends Page
 {
@@ -155,7 +160,7 @@ class JobPosting extends Page
         'month',
         'week',
         'day',
-        'hour'
+        'hour',
     ];
 
     /**
@@ -170,20 +175,24 @@ class JobPosting extends Page
     private static $allowed_children = [];
 
     private static $db = [
-        'Reference'       => DBVarchar::class,
-        'Summary'         => DBText::class,
-        'DisplayLocation' => DBVarchar::class,
-        'JobDescription'  => DBHTMLText::class,
-        'Salary'          => DBVarchar::class,
-        'SalaryCurrency'  => DBVarchar::class,
-        'SalaryFrom'      => DBFloat::class,
-        'SalaryTo'        => DBFloat::class,
-        'SalaryPer'       => DBVarchar::class,
-        'SalaryBenefits'  => DBVarchar::class,
-        'ClosingDate'     => DBDate::class,
-        'JobDuration'     => DBVarchar::class,
-        'JobStartDate'    => DBVarchar::class,
-        'JobSkills'       => DBVarchar::class,
+        'Reference'        => DBVarchar::class,
+        'ContactName'      => DBVarchar::class,
+        'ContactEmail'     => DBVarchar::class,
+        'ContactTelephone' => DBVarchar::class,
+        'ContactURL'       => DBVarchar::class,
+        'Summary'          => DBText::class,
+        'DisplayLocation'  => DBVarchar::class,
+        'JobDescription'   => DBHTMLText::class,
+        'Salary'           => DBVarchar::class,
+        'SalaryCurrency'   => DBVarchar::class,
+        'SalaryFrom'       => DBFloat::class,
+        'SalaryTo'         => DBFloat::class,
+        'SalaryPer'        => DBVarchar::class,
+        'SalaryBenefits'   => DBVarchar::class,
+        'ClosingDate'      => DBDate::class,
+        'JobDuration'      => DBVarchar::class,
+        'JobStartDate'     => DBVarchar::class,
+        'JobSkills'        => DBVarchar::class,
     ];
 
     private static $many_many = [
@@ -259,6 +268,14 @@ class JobPosting extends Page
                         $this->getParent()->JobTypes()->map('ID', 'Title')->toArray(),
                         $this->JobTypes()
                     ),
+                ]
+            );
+            $fields->addFieldsToTab('Root.ContactOverrides',
+                [
+                    TextField::create('ContactName', 'Contact Name Override')->setDescription('This will automatically be filled from the job Owner unless something is entered here'),
+                    TextField::create('ContactEmail', 'Contact Email Override')->setDescription('This will automatically be filled from the job Owner unless something is entered here'),
+                    TextField::create('ContactTelephone', 'Contact Telephone Override')->setDescription('This will automatically be filled from the job Owner unless something is entered here'),
+                    TextField::create('ContactURL', 'Contact URL Override')->setDescription('This will automatically be filled from the job Owner unless something is entered here'),
                 ]
             );
         }
@@ -394,5 +411,81 @@ class JobPosting extends Page
     {
         parent::onAfterDelete();
         $this->doUnpublish();
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayContactName()
+    {
+        if ($this->ContactName !== '' && $this->ContactName !== null) {
+            return $this->ContactName;
+        }
+
+        if ($this->OwnerID != 0) {
+            return $this->Owner()->getName();
+        }
+
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayPosition()
+    {
+        if ($this->ContactName !== '' && $this->ContactName !== null) {
+            return '';
+        }
+
+        if ($this->OwnerID != 0) {
+            return $this->Owner()->Position;
+        }
+
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayContactEmail()
+    {
+        if ($this->ContactEmail !== '' && $this->ContactEmail !== null) {
+            return $this->ContactEmail;
+        }
+
+        if ($this->OwnerID != 0) {
+            return $this->Owner()->Email;
+        }
+
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayContactTelephone()
+    {
+        if ($this->ContactTelephone !== '' && $this->ContactTelephone !== null) {
+            return $this->ContactTelephone;
+        }
+
+        if ($this->OwnerID != 0) {
+            return $this->Owner()->PhoneNumber;
+        }
+
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayContactURL()
+    {
+        if ($this->ContactURL !== '' && $this->ContactURL !== null) {
+            return $this->ContactURL;
+        }
+
+        return Director::absoluteBaseURL();
     }
 }

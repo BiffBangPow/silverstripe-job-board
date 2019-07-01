@@ -20,6 +20,7 @@ class JobType extends DataObject
      */
     private static $db = [
         'Title' => DBVarchar::class,
+        'GoogleJobsValue' => DBVarchar::class,
     ];
 
     /**

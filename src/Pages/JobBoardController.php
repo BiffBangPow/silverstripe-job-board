@@ -32,6 +32,8 @@ class JobBoardController extends PageController
             $filterAny['Title:PartialMatch'] = $textSearch;
             $filterAny['Summary:PartialMatch'] = $textSearch;
             $filterAny['JobDescription:PartialMatch'] = $textSearch;
+            $filterAny['JobSkills:PartialMatch'] = $textSearch;
+            $filterAny['SalaryBenefits:PartialMatch'] = $textSearch;
         }
 
         $sectorIDs = $this->getRequest()->getVar('s');
