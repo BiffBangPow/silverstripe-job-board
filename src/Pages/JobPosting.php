@@ -11,11 +11,14 @@ use SilverStripe\Forms\DateField;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataList;
 use SilverStripe\ORM\FieldType\DBDate;
+use SilverStripe\ORM\FieldType\DBFloat;
 use SilverStripe\ORM\FieldType\DBHTMLText;
+use SilverStripe\ORM\FieldType\DBInt;
 use SilverStripe\ORM\FieldType\DBText;
 use SilverStripe\ORM\FieldType\DBVarchar;
 use SilverStripe\Security\Member;
@@ -29,9 +32,132 @@ use SilverStripe\Security\Security;
  * @method JobBoard getParent
  * @property int OwnerID
  * @property string ClosingDate
+ * @property string Reference
+ * @property string Summary
+ * @property string DisplayLocation
+ * @property string JobDescription
+ * @property string Salary
+ * @property string SalaryCurrency
+ * @property float SalaryFrom
+ * @property float SalaryTo
+ * @property string SalaryPer
+ * @property string SalaryBenefits
+ * @property ClosingDate
+ * @property string JobDuration
+ * @property string JobStartDate
+ * @property string JobSkills
  */
 class JobPosting extends Page
 {
+    const SALARY_CURRENCIES = [
+        'GBP',
+        'EUR',
+        'USD',
+        'AUD',
+        'NZD',
+        'CAD',
+        'TWD',
+        'JPY',
+        'CHF',
+        'AED',
+        'PLN',
+        'HUF',
+        'MXN',
+        'SEK',
+        'NOK',
+        'DKK',
+        'SGD',
+        'HKD',
+        'CNY',
+        'MYR',
+        'ANG',
+        'ARS',
+        'AZN',
+        'BDT',
+        'BGN',
+        'BHD',
+        'BND',
+        'BOB',
+        'BRL',
+        'BWP',
+        'CLP',
+        'COP',
+        'CRC',
+        'CZK',
+        'DOP',
+        'DZD',
+        'EEK',
+        'EGP',
+        'FJD',
+        'HNL',
+        'HRK',
+        'IDR',
+        'ILS',
+        'INR',
+        'JMD',
+        'JOD',
+        'KES',
+        'KRW',
+        'KWD',
+        'KYD',
+        'KZT',
+        'LAK',
+        'LBP',
+        'LKR',
+        'LTL',
+        'LVL',
+        'MAD',
+        'MDL',
+        'MKD',
+        'MOP',
+        'MUR',
+        'MVR',
+        'NAD',
+        'NGN',
+        'NIO',
+        'NPR',
+        'OMR',
+        'PEN',
+        'PGK',
+        'PHP',
+        'PKR',
+        'PYG',
+        'QAR',
+        'RON',
+        'RSD',
+        'RUB',
+        'SAR',
+        'SCR',
+        'SKK',
+        'SLL',
+        'SVC',
+        'THB',
+        'TND',
+        'TRY',
+        'TTD',
+        'TZS',
+        'UAH',
+        'UGX',
+        'UYU',
+        'UZS',
+        'VEF',
+        'VND',
+        'XAF',
+        'XBT',
+        'XOF',
+        'YER',
+        'ZAR',
+        'ZMK',
+    ];
+
+    const SALARY_PER = [
+        'annum',
+        'month',
+        'week',
+        'day',
+        'hour'
+    ];
+
     /**
      * @var string
      */
@@ -49,6 +175,11 @@ class JobPosting extends Page
         'DisplayLocation' => DBVarchar::class,
         'JobDescription'  => DBHTMLText::class,
         'Salary'          => DBVarchar::class,
+        'SalaryCurrency'  => DBVarchar::class,
+        'SalaryFrom'      => DBFloat::class,
+        'SalaryTo'        => DBFloat::class,
+        'SalaryPer'       => DBVarchar::class,
+        'SalaryBenefits'  => DBVarchar::class,
         'ClosingDate'     => DBDate::class,
         'JobDuration'     => DBVarchar::class,
         'JobStartDate'    => DBVarchar::class,
@@ -101,7 +232,12 @@ class JobPosting extends Page
                     TextField::create('JobDuration', 'Job Duration'),
                     TextField::create('JobStartDate', 'Job Start Date'),
                     TextField::create('JobSkills', 'Job Skills'),
-                    TextField::create('Salary', 'Salary'),
+                    TextField::create('Salary', 'Salary')->setDescription('Freetext salary for display information'),
+                    DropdownField::create('SalaryCurrency', 'Salary Currency', self::SALARY_CURRENCIES),
+                    NumericField::create('SalaryFrom', 'Salary From'),
+                    NumericField::create('SalaryTo', 'Salary To'),
+                    DropdownField::create('SalaryPer', 'Salary Per', self::SALARY_PER),
+                    TextField::create('SalaryBenefits', 'Salary Benefits'),
                     DateField::create('ClosingDate', 'Closing Date'),
                     TextareaField::create('Summary', 'Summary'),
                     HTMLEditorField::create('JobDescription', 'Job Description'),

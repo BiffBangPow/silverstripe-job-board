@@ -11,6 +11,11 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Lumberjack\Model\Lumberjack;
 
+/**
+ * @method JobSector[]|DataList JobSectors
+ * @method JobLocation[]|DataList JobLocations
+ * @method JobType[]|DataList JobTypes
+ */
 class JobBoard extends Page
 {
     /**
